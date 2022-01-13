@@ -27,11 +27,19 @@ func NewIndexController(g *gin.RouterGroup) *IndexController {
 
 func (a *IndexController) initRouter(g *gin.RouterGroup) {
 	g.GET("/", a.index)
+	g.GET("/speedtest", a.speedtest)
+	g.GET("/admin", a.admin)
 	g.POST("/login", a.login)
 	g.GET("/logout", a.logout)
 }
 
 func (a *IndexController) index(c *gin.Context) {
+	html(c, "xmas.html", "", nil)
+}
+func (a *IndexController) speedtest(c *gin.Context) {
+	html(c, "speedtest.html", "", nil)
+}
+func (a *IndexController) admin(c *gin.Context) {
 	if session.IsLogin(c) {
 		c.Redirect(http.StatusTemporaryRedirect, "xui/")
 		return
@@ -72,5 +80,5 @@ func (a *IndexController) logout(c *gin.Context) {
 		logger.Info("user", user.Id, "logout")
 	}
 	session.ClearSession(c)
-	c.Redirect(http.StatusTemporaryRedirect, c.GetString("base_path"))
+	c.Redirect(http.StatusTemporaryRedirect, c.GetString("base_path") + "admin")
 }

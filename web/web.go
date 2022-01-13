@@ -170,6 +170,8 @@ func (s *Server) initRouter() (*gin.Engine, error) {
 	engine.Use(sessions.Sessions("session", store))
 	engine.Use(func(c *gin.Context) {
 		c.Set("base_path", basePath)
+		c.Header("strict-transport-security", "max-age=31536000; includeSubDomains; preload")
+		c.Header("Build in", "fbigames.com")
 	})
 	engine.Use(func(c *gin.Context) {
 		uri := c.Request.RequestURI
