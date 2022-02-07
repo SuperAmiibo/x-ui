@@ -304,7 +304,7 @@ func (s *Server) Start() (err error) {
 			s.Stop()
 		}
 	}()
-
+		
 	loc, err := s.settingService.GetTimeLocation()
 	if err != nil {
 		return err
@@ -356,13 +356,13 @@ func (s *Server) Start() (err error) {
 		logger.Info("web server run http on", listener.Addr())
 	}
 	s.listener = listener
-
+	
 	s.startTask()
 
 	s.httpServer = &http.Server{
 		Handler: engine,
 	}
-
+	
 	go func() {
 		s.httpServer.Serve(listener)
 	}()

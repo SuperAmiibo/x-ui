@@ -36,9 +36,11 @@ func (a *IndexController) initRouter(g *gin.RouterGroup) {
 func (a *IndexController) index(c *gin.Context) {
 	html(c, "xmas.html", "", nil)
 }
+
 func (a *IndexController) speedtest(c *gin.Context) {
 	html(c, "speedtest.html", "", nil)
 }
+
 func (a *IndexController) admin(c *gin.Context) {
 	if session.IsLogin(c) {
 		c.Redirect(http.StatusTemporaryRedirect, "xui/")
